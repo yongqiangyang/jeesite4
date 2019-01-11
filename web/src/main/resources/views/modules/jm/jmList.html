@@ -1,0 +1,21 @@
+<% layout('/layouts/default.html', {title: 'jm管理', libs: ['dataGrid']}){ %>
+<div>你好,JM</div>
+<p> ${jm.mtbf}</p>
+<button onclick="JMRUN()">运行</button>
+<a href="${ctx}/jm/jm/form?id="+${jm.id}> yyq</a>
+<div id="asd"></div>
+<% } %>
+<script>
+function JMRUN() {
+    failuretime;
+    var param={
+        "FTIME": failuretime,
+
+    }
+    postAjax("/jm/jm/JMRun",param,function(data){
+        var JMHtml="";
+
+    })
+}
+
+</script>
