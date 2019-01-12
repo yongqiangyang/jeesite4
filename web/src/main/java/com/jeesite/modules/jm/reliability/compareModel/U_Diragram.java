@@ -3,6 +3,7 @@ package com.jeesite.modules.jm.reliability.compareModel;
 
 import com.jeesite.modules.jm.reliability.base.compareModel;
 import com.jeesite.modules.jm.reliability.base.model;
+import com.jeesite.modules.jm.reliability.models.Jelinski_Moranda;
 
 
 import java.util.Collections;
@@ -72,4 +73,18 @@ public class U_Diragram extends compareModel {
 		// TODO Auto-generated method stub
 		this.name="U_Diragram";
 	}
+
+	public static  void main(String[] args) {
+		model jm=new Jelinski_Moranda();
+		U_Diragram U=new U_Diragram(jm);
+		U.run();
+		int length=U.getResultNum();
+		for(int i=0;i<length;i++){
+			double X=U.getX(i);
+			double Y=U.getY(i);
+			System.out.println("X:"+X+"  Y:"+Y);
+		}
+
+	}
+
 }

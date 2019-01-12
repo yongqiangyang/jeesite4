@@ -1,21 +1,56 @@
 <% layout('/layouts/default.html', {title: 'jm管理', libs: ['dataGrid']}){ %>
-<div>你好,JM</div>
-<p> ${jm.mtbf}</p>
-<button onclick="JMRUN()">运行</button>
-<a href="${ctx}/jm/jm/form?id="+${jm.id}> yyq</a>
-<div id="asd"></div>
+
+<!--<p> ${jm.mtbf}</p>-->
+<div class="main-content">
+    <div class="box box-main">
+        <div class="box-header">
+            <div class="box-title">
+                <i class="fa fa-list-alt"></i> ${text('JM模型')}
+            </div>
+            <div class="box-tools pull-right">
+                <button  onclick="JMRUN()" class="btn btn-default"><i class="fa fa-filter"></i> 运行</button>
+            </div>
+        </div>
+        <div class="box-body" style="height: 10000px">
+            <p>EX:</p>
+            <p id="EX"></p>
+            <p>EY:</p>
+            <p id="EY"> </p>
+            <p>固有错误数:</p>
+            <p id="InherentErrorNumber"></p>
+            <p>方程中的常量:</p>
+            <p id="constant"></p>
+            <table id="postList"></table>
+        </div>
+    </div>
+</div>
+
+
+
 <% } %>
 <script>
-function JMRUN() {
-    failuretime;
-    var param={
-        "FTIME": failuretime,
+    function JMRUN() {
+    js.ajaxSubmit("JMRun", {}, result => {
+        $('#InherentErrorNumber').html(result.InherentErrorNumber)
+        $('#EX').html(result.EX)
+        $('#EY').html(result.EY)
+        $('#constant').html(result.constant)
 
+        var postHtml=""
+        postHtml+="<tr>"
+        postHtml+="<th>id</th>"
+        postHtml+="<th>MTBF</th>"
+        postHtml+="</tr>"
+        var length=result.dataNum
+        for (var i=1;i<=length;i++)
+        {
+            postHtml+="<tr>"
+            postHtml+="<td>"+i+"</td>"
+            postHtml+="<td>"+result.t[i]+"</td>"
+            postHtml+="</tr>"
+        }
+        $("#postList").html(postHtml)
+
+        })
     }
-    postAjax("/jm/jm/JMRun",param,function(data){
-        var JMHtml="";
-
-    })
-}
-
 </script>
