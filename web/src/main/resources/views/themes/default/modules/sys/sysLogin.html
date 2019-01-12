@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="${ctxStatic}/jquery-toastr/2.0/toastr.min.css?${_version}">
 <link rel="stylesheet" href="${ctxStatic}/modules/sys/sysLogin.css?${_version}">
 <div class="login-box">
+
     <div class="login-logo">
         <a href="${ctx}/login"><b>软件可靠性</b></a>
     </div>
@@ -24,6 +25,7 @@
             data-msg-required="${text('请填写登录密码.')}" placeholder="${text('登录密码')}" autocomplete="off"/>
         </div>
         <%/*<!-- if(@Global.getConfigToBoolean('user.useCorpModel', 'false')){ %>
+
 			<div class="form-group has-feedback">
 				<select name="param_corpCode" class="form-control">
 					<% for(var user in @UserUtils.findCorpList()){ %>
@@ -32,6 +34,7 @@
 				</select>
 			</div>
 			<% } -->*/%>
+
         <div class="form-group has-feedback" id="isValidCodeLogin" style="display:${isValidCodeLogin?'blank':'none'}">
             <#form:validcode name="validCode" isRequired="true" isRemote="true" isLazy="false"/>
         </div>
@@ -76,7 +79,7 @@
 </div>
 <div class="login-copyright">
     &copy; ${@DateUtils.getYear()} software reliability - Powered By Wl Lzp Hlx Yyq
-</div>
+
 </div>
 <% } %>
 <script>var secretKey = '${@Global.getConfig("shiro.loginSubmit.secretKey")}';</script>
