@@ -36,6 +36,11 @@
 			<artifactId>jeesite-module-core</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>tw.edu.ntu.csie</groupId>
+			<artifactId>libsvm</artifactId>
+			<version>3.23</version>
+		</dependency>
 		
 		<!-- 在线API文档 -->
 		<dependency>

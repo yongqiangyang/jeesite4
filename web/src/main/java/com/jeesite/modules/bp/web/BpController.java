@@ -6,6 +6,11 @@ package com.jeesite.modules.bp.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jeesite.modules.bp.edu.packt.neuralnet.NeuralNet;
+import com.jeesite.modules.bp.edu.packt.neuralnet.math.IActivationFunction;
+import com.jeesite.modules.bp.edu.packt.neuralnet.math.Linear;
+import com.jeesite.modules.bp.edu.packt.neuralnet.math.RandomNumberGenerator;
+import com.jeesite.modules.bp.edu.packt.neuralnet.math.Sigmoid;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -76,7 +81,34 @@ public class BpController extends BaseController {
 	@RequiresPermissions("bp:bp:view")
 	@RequestMapping(value = "BPrun",method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public String BPrun() {
-		return "haha";
+	public result BPrun(int numberOfInputs,int numberOfOutputs,int[] numberOfHiddenNeurons,String input) {
+		RandomNumberGenerator.seed=0;
+
+		IActivationFunction[] hiddenAcFnc = { new Sigmoid(1.0) } ;
+		Linear outputAcFnc = new Linear(1.0);
+		NeuralNet nn = new NeuralNet(numberOfInputs,numberOfOutputs,
+				numberOfHiddenNeurons,hiddenAcFnc,outputAcFnc);
+		nn.print();
+
+
+		String[] temp = input.split(",");
+		double []  neuralInput=new double[numberOfInputs];
+		for (int i = 0; i < numberOfInputs; i++) {
+			neuralInput[i]=Double.valueOf(temp[i]);
+			System.out.println(temp[i]);
+			System.out.println(neuralInput[i]);
+		}
+
+		nn.setInputs(neuralInput);
+		nn.calc();
+
+
+		result result =new result();
+		double[] temp1=nn.getOutputs();
+		for(int i=0;i<numberOfOutputs;i++){
+			result.neuralOutput[i]=temp1[i];
+		}
+		result.numberOfOutputs=numberOfOutputs;
+		return result;
 	}
 }

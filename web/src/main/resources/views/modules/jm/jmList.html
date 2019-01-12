@@ -1,4 +1,4 @@
-<% layout('/layouts/default.html', {title: 'jm管理', libs: ['dataGrid']}){ %>
+<% layout('/layouts/default.html', {title: 'jm模型', libs: ['dataGrid']}){ %>
 
 <!--<p> ${jm.mtbf}</p>-->
 <div class="main-content">
@@ -11,17 +11,30 @@
                 <button  onclick="JMRUN()" class="btn btn-default"><i class="fa fa-filter"></i> 运行</button>
             </div>
         </div>
-        <div class="box-body" style="height: 10000px">
-            <p>EX:</p>
-            <p id="EX"></p>
-            <p>EY:</p>
-            <p id="EY"> </p>
-            <p>固有错误数:</p>
-            <p id="InherentErrorNumber"></p>
-            <p>方程中的常量:</p>
-            <p id="constant"></p>
-            <table id="postList"></table>
+        <div class="box-body" style="" >
+            <div id="main" style="width:100%;">
+                <div id="left" style="width:40%;float:left;">
+                    <p><b>一、JM输出数据</b></p>
+                    <p><b>(1) EX:</b></p>
+                    <p id="EX">等待运行...</p>
+                    <p><b>(2) EY:</b></p>
+                    <p id="EY">等待运行...</p>
+                    <p><b>(3) 固有错误数:</b></p>
+                    <p id="InherentErrorNumber">等待运行...</p>
+                    <p><b>(4) 方程中的常量:</b></p>
+                    <p id="constant">等待运行...</p>
+                </div>
+                <div style="width:2px;height:590px;border-left:1px solid #808080;float:left;margin-left:15px;"></div>
+                <div id="right" style="width:30%;float:left;">
+                    <p><b>二、失效数据显示:</b></p>
+                    <table id="postList";  style="height: 450px"></table>
+                </div>
+            </div>
         </div>
+        <div class="box-footer">
+            <p style="text-align: center">software reliability - Powered By Wl Lzp Hlx Yyq</p>
+        </div>
+
     </div>
 </div>
 
@@ -38,15 +51,15 @@
 
         var postHtml=""
         postHtml+="<tr>"
-        postHtml+="<th>id</th>"
-        postHtml+="<th>MTBF</th>"
+        postHtml+="<th style='border:1px solid #000000;color: red;width: 200px;height: 30px;text-align: center'>id</th>"
+        postHtml+="<th style='border:1px solid #000000;color: red;width: 200px;height: 30px;text-align: center'>MTBF</th>"
         postHtml+="</tr>"
         var length=result.dataNum
         for (var i=1;i<=length;i++)
         {
             postHtml+="<tr>"
-            postHtml+="<td>"+i+"</td>"
-            postHtml+="<td>"+result.t[i]+"</td>"
+            postHtml+="<td style='border:1px solid #000000;text-align: center'>"+i+"</td>"
+            postHtml+="<td style='border:1px solid #000000;text-align: center'>"+result.t[i]+"</td>"
             postHtml+="</tr>"
         }
         $("#postList").html(postHtml)

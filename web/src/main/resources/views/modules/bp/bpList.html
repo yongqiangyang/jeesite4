@@ -10,9 +10,41 @@
 			</div>
 		</div>
 		<div class="box-body">
+			<p><b>一、请输入数据之后点击运行：</b></p>
+			<form  id="user" method="post" >
+					<label ><b>输入层个数:</b></label>
+					<input
+							name="name"
+							type="text"
+							id="numberOfInputs"
+					/>
+					<label ><b>输出层个数:</b></label>
+					<input
+							name="name"
+							type="text"
+							id="numberOfOutputs"
+					/>
+					<label ><b>隐含层个数:</b></label>
+					<input
+							name="name"
+							type="text"
+							id="numberOfHiddenNeurons"
+					/>
+					<label ><b>输入层数据:</b></label>
+					<input
+							name="name"
+							type="text"
+							id="input"
+					/>
+			</form>
+			<HR align=center width=1600 color=#987cb9 SIZE=1>
+			<p><b>二、神经网络期望输出：</b></p>
 
-			<p id="test1">sdas</p>
+			<table id="postList";  style="text-align: center;margin:0 auto;height: 450px"></table>
 
+		</div>
+		<div class="box-footer">
+			<p style="text-align: center;">software reliability - Powered By Wl Lzp Hlx Yyq</p>
 		</div>
 	</div>
 </div>
@@ -20,8 +52,32 @@
 <script>
 // 初始化DataGrid对象
 function BPRUN() {
-	js.ajaxSubmit("BPrun", {}, result => {
-		$('#test1').html(result);
+	var numberOfInputs=$("#numberOfInputs").val();
+	var numberOfOutputs=$("#numberOfOutputs").val();
+	var numberOfHiddenNeurons=$("#numberOfHiddenNeurons").val();
+	var input=$("#input").val();
+	var param={
+		"numberOfInputs":numberOfInputs,
+		"numberOfOutputs":numberOfOutputs,
+		"numberOfHiddenNeurons":numberOfHiddenNeurons,
+		"input":input,
+	};
+	js.ajaxSubmit("BPrun",param, result => {
+
+		var postHtml=""
+		postHtml+="<tr>"
+		postHtml+="<th style='border:1px solid #000000;color: red;width: 200px;height: 30px;text-align: center'>序号</th>"
+		postHtml+="<th style='border:1px solid #000000;color: red;width: 200px;height: 30px;text-align: center'>期望输出</th>"
+		postHtml+="</tr>"
+		var length=result.numberOfOutputs
+		for (var i=0;i<length;i++)
+		{
+			postHtml+="<tr>"
+			postHtml+="<td style='border:1px solid #000000;text-align: center'>"+(i+1)+"</td>"
+			postHtml+="<td style='border:1px solid #000000;text-align: center'>"+result.neuralOutput[i]+"</td>"
+			postHtml+="</tr>"
+		}
+		$("#postList").html(postHtml)
 	})
 }
 </script>
