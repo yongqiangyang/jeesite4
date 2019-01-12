@@ -175,5 +175,29 @@ public class Jelinski_Moranda extends model {
 	}
 
 
+	public double getInherentErrorNumber() {
+		return InherentErrorNumber;
+	}
 
+	public void setInherentErrorNumber(double inherentErrorNumber) {
+		InherentErrorNumber = inherentErrorNumber;
+	}
+
+	public double getEX() {
+		return EX;
+	}
+
+	public double getEY() {
+		return EY;
+	}
+
+	public double getConstant() {
+		return constant;
+	}
+	public int[] getT() {
+		return t;
+	}
+	public int getDataNum() {
+		return dataNum;
+	}
 }

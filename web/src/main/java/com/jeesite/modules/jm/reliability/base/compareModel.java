@@ -19,7 +19,7 @@ public abstract class compareModel {
 		return this.name+" "+mo.getName();
 	}
 	
-	public double getResultNum() {
+	public int getResultNum() {
         return resultNum;
     }
     

@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.jeesite.common.config.Global;
 import com.jeesite.common.entity.Page;
@@ -102,12 +99,23 @@ public class JmController extends BaseController {
 	}
 
 	@RequiresPermissions("jm:jm:edit")
-	@RequestMapping(value="JMRun")
+	@RequestMapping(value="JMRun", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public int JMRun(int[] FTime){
+	public result JMRun(){
+
+		//运行JM模型
 		Jelinski_Moranda jelinski_moranda=new Jelinski_Moranda();
 		jelinski_moranda.run();
-		return 1;
+
+		//将后端数据写入一个公有类中，将其传递给前端
+		result result=new result();
+		result.InherentErrorNumber=jelinski_moranda.getInherentErrorNumber();
+		result.EX=jelinski_moranda.getEX();
+		result.EY=jelinski_moranda.getEY();
+		result.constant=jelinski_moranda.getConstant();
+		result.t=jelinski_moranda.getT();
+		result.dataNum=jelinski_moranda.getDataNum();
+		return result;
 	}
 	
 }
